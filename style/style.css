@@ -98,3 +98,10 @@ body, html {
     }
 }
 */
+
+img {
+    position: relative;
+    man-width: 10%;
+    max-height: 100%;
+    height: 100%;
+}
