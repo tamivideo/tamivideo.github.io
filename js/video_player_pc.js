@@ -53,6 +53,7 @@
     btn_normal.addEventListener('click', e => {
         video.playbackRate = 1.0;
         show_speed.innerText = "1倍速";
+        inp_speed.value = 1.0;
     });
 
     video.addEventListener('timeupdate', e => {
