@@ -1,0 +1,100 @@
+body, html {
+    height: 100%;
+}
+
+#seekbar {
+    @media screen and (max-width: 900px) {
+        position: relative;
+        max-width: 90%;
+        width: 90%;
+        max-height: 10%;
+        height: 10%;
+    }
+
+    @media screen and (min-width: 900px) {
+        position: relative;
+        max-width: 640px;
+        width: 640px;
+        max-height: 10%;
+        height: 10%;
+    }
+}
+
+#video_player {
+    @media screen and (max-width: 900px) {
+        position: relative;
+        man-width: 100%;
+        max-height: 100%;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 900px) {
+        position: relative;
+        man-width: 100%;
+        max-height: 90%;
+        height: 90%;
+    }
+}
+
+#back {
+    position: relative;
+    man-width: 10%;
+    max-height: 100%;
+    height: 100%;
+}
+
+#play {
+    position: relative;
+    man-width: 10%;
+    max-height: 100%;
+    height: 100%;
+}
+
+#pause {
+    position: relative;
+    man-width: 10%;
+    max-height: 100%;
+    height: 100%;
+}
+
+#forward {
+    position: relative;
+    man-width: 10%;
+    max-height: 100%;
+    height: 100%;
+}
+
+#reset {
+    position: relative;
+    man-width: 10%;
+    max-height: 100%;
+    height: 100%;
+}
+
+#controls_pc {
+    position: relative;
+    man-width: 100%;
+    max-height: 5%;
+    height: 5%;
+}
+/*
+#controls_pc {
+    @media screen and (max-width: 1280px) {
+        display: none;
+    }
+
+    @media screen and (min-width: 1280px) {
+        display: inline;
+    }
+}
+
+#controls_sp {
+    @media screen and (max-width: 1280px) {
+        display: inline;
+    }
+
+    @media screen and (min-width: 1280px) {
+        display: none;
+    }
+}
+*/

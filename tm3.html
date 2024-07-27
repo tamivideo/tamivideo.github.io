@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>たみたみ動画(仮)</title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+</head>
+<body>
+    <video id="video_player">
+        <source src="videos/tm3.mp4" type="video/mp4" />
+    </video>
+    <br>
+    <div id="controls_pc">
+        <button id="play" style="display: inline;">再生</button>
+        <button id="pause" style="display: none;">停止</button>
+        <button id="back">10秒戻る</button>
+        <button id="forward">10秒進む</button>
+        <input type="range" id="seekbar" min="0" max="100">
+        <span id="current-show-minute"></span>:<span id="current-show-second"></span>/<span id="duration-show"></span>
+        音量
+        <input type="range" id="volume" min="0" max="100">
+        <span id="volume-show"></span>
+        <button id="reset">最初から</button>
+        <script src="js/video_player_pc.js"></script>
+    </div>
+<!--
+    <div id="controls_sp">
+        <button id="back-sp">10秒<br>戻る</button>
+        <button id="play-sp" style="display: inline;">再<br>生</button>
+        <button id="pause-sp" style="display: none;">停<br>止</button>
+        <button id="forward-sp">10秒<br>進む</button>
+        <hr>
+        <input type="range" id="seekbar-sp" min="0" max="100"><span id="current-show-minute-sp"></span>:<span id="current-show-second-sp"></span>/<span id="duration-show-sp"></span><br>
+        <hr>
+        音量
+        <input type="range" id="volume-sp" min="0" max="100">
+        <span id="volume-show-sp"></span>
+        <script src="js/video_player_sp.js"></script>
+    </div>
+-->
+</body>
+</html>
