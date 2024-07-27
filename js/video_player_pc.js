@@ -1,6 +1,6 @@
     const btn_play = document.getElementById('play');
     const btn_pause = document.getElementById('pause');
-    const btn_reset = document.getElementById('reset');
+//    const btn_reset = document.getElementById('reset');
     const btn_back = document.getElementById('back');
     const inp_seekbar = document.getElementById('seekbar');
     const show_current_minute = document.getElementById('current-show-minute');
@@ -9,11 +9,16 @@
     const btn_forward = document.getElementById('forward');
     const inp_volume = document.getElementById('volume');
     const show_volume = document.getElementById('volume-show');
+    const btn_normal = document.getElementById('normal');
+    const inp_speed = document.getElementById('speed');
+    const show_speed = document.getElementById('speed-show');
     const video = document.querySelector('video');
 
     video.volume = 0.1
     inp_volume.value = video.volume * 100;
     inp_seekbar.value = 0;
+    inp_speed.value = 1.0;
+    show_speed.innerText = inp_speed.value + "倍速";
 
     function numDigits(num){
         return num.toString().length;
@@ -31,14 +36,22 @@
         btn_play.style.display = 'inline';
     })
 
-
+/*
     btn_reset.addEventListener('click', e => {
         video.currentTime = 0;
     });
-
+*/
 
     btn_back.addEventListener('click', e => {
         video.currentTime -= 10;
+    });
+
+    btn_forward.addEventListener('click', e => {
+        video.currentTime += 10;
+    });
+
+    btn_normal.addEventListener('click', e => {
+        video.playbackRate = 1.0;
     });
 
     video.addEventListener('timeupdate', e => {
@@ -62,6 +75,15 @@
         alert('エラー');
     })
 
+    const setSpeed = (val) => {
+        show_speed.innerText = inp_speed.value + "倍速";
+    }
+
+    const speedOnChange = (e) => {
+        video.playbackRate = inp_speed.value;
+        setSpeed(e.target.value);
+    }
+
     const setCurrent = (val) => {
         show_current_minute.innerText = Math.trunc(val / 60);
         if (numDigits(Math.trunc(val - (show_current_minute.innerText*60))) >= 2) {
@@ -78,13 +100,9 @@
     }
 
     const currentOnChange = (e) => {
-        video.currentTime = video.duration * (inp_seekbar.value / 100)
+        video.currentTime = video.duration * (inp_seekbar.value / 100);
         setCurrent(e.target.value);
     }
-
-    btn_forward.addEventListener('click', e => {
-        video.currentTime += 10;
-    });
 
     const setVolume = (val) => {
         show_volume.innerText = val;
@@ -98,8 +116,10 @@
     window.onload = () => {
         inp_volume.addEventListener('input', volumeOnChange);
         inp_seekbar.addEventListener('input', currentOnChange);
+        inp_speed.addEventListener('input', speedOnChange);
         setVolume(inp_volume.value);
         setCurrent(inp_seekbar.value);
+        setSpeed(inp_speed.value);
     }
 
     document.addEventListener('keydown', event => {

@@ -1,12 +1,13 @@
 body, html {
     height: 100%;
+    font-size: large;
 }
 
 #seekbar {
     @media screen and (max-width: 900px) {
         position: relative;
-        max-width: 90%;
-        width: 90%;
+        max-width: 70%;
+        width: 70%;
         max-height: 10%;
         height: 10%;
     }
@@ -31,51 +32,90 @@ body, html {
     @media screen and (min-width: 900px) {
         position: relative;
         man-width: 100%;
-        max-height: 90%;
-        height: 90%;
+        max-height: 85%;
+        height: 85%;
     }
 }
 
-#back {
-    position: relative;
-    man-width: 10%;
-    max-height: 100%;
-    height: 100%;
-}
+#play, #pause, #back, #forward {
+    @media screen and (max-width: 900px) {
+        position: relative;
+        man-width: 30%;
+        max-height: 100%;
+        height: 100%;
+        font-size: x-large;
+    }
 
-#play {
-    position: relative;
-    man-width: 10%;
-    max-height: 100%;
-    height: 100%;
-}
-
-#pause {
-    position: relative;
-    man-width: 10%;
-    max-height: 100%;
-    height: 100%;
-}
-
-#forward {
-    position: relative;
-    man-width: 10%;
-    max-height: 100%;
-    height: 100%;
+    @media screen and (min-width: 900px) {
+        position: relative;
+        man-width: 10%;
+        max-height: 100%;
+        height: 100%;
+        font-size: large;
+    }
 }
 
 #reset {
-    position: relative;
-    man-width: 10%;
-    max-height: 100%;
-    height: 100%;
+
+    @media screen and (max-width: 900px) {
+        position: relative;
+        man-width: 30%;
+        max-height: 100%;
+        height: 100%;
+        font-size: x-large;
+    }
+
+    @media screen and (min-width: 900px) {
+        position: relative;
+        man-width: 10%;
+        max-height: 100%;
+        height: 100%;
+        font-size: large;
+    }
+}
+
+#slow, #normal, #fast {
+    @media screen and (max-width: 900px) {
+        position: relative;
+        man-width: 30%;
+        max-height: 100%;
+        height: 100%;
+        font-size: x-large;
+    }
+
+    @media screen and (min-width: 900px) {
+        position: relative;
+        man-width: 10%;
+        max-height: 100%;
+        height: 100%;
+        font-size: large;
+    }
+}
+
+.sp {
+    @media screen and (max-width: 900px) {
+        display: block;
+    }
+
+    @media screen and (min-width: 900px) {
+        display: none;
+    }
 }
 
 #controls_pc {
-    position: relative;
-    man-width: 100%;
-    max-height: 5%;
-    height: 5%;
+    @media screen and (max-width: 900px) {
+        position: relative;
+        man-width: 100%;
+        max-height: 10%;
+        height: 10%;
+    }
+
+    @media screen and (min-width: 900px) {
+        position: relative;
+        man-width: 100%;
+        max-height: 5%;
+        height: 5%;
+    }
 }
 /*
 #controls_pc {
