@@ -70,6 +70,10 @@
             show_duration.innerText = Math.trunc(video.duration / 60) + ":0" + Math.trunc(video.duration - (Math.trunc(video.duration / 60)*60));
         }
 
+        addComment("ここすき");
+        addComment("wwwww");
+        addComment("やりますねぇ");
+
     });
 
     video.addEventListener('error', e => {
@@ -141,3 +145,35 @@
             } else {alert('予期しないエラーです。管理者にお知らせください。理由：再生ボタン停止ボタン消失')}
         }
     });
+
+    const commentContainer = document.getElementById('comment_container');
+    const commentText = document.getElementById('comment_text');
+    const sendCommentButton = document.getElementById('send_comment');
+
+    function addComment(text) {
+        const comment = document.createElement('div');
+        comment.className = 'comment';
+        comment.innerText = text;
+        comment.style.top = `${Math.random() * 90}%`;
+        commentContainer.appendChild(comment);
+
+        comment.addEventListener('animationend', () => {
+            commentContainer.removeChild(comment);
+        });
+    }
+
+    sendCommentButton.addEventListener('click', () => {
+        const text = commentText.value;
+        if (text) {
+            addComment(text);
+            commentText.value = ''; 
+        }
+    });
+
+    commentText.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendCommentButton.click();
+        }
+    });
+
+

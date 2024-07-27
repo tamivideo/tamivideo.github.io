@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.player {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+button, input[type="range"] {
+    margin: 0 5px;
+}
+
+.comment {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    white-space: nowrap;
+    transform: translateX(-100%);
+    animation: slide 5s linear;
+}
+
+@keyframes slide {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -100%;
+    }
+}

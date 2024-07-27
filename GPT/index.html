@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニコニコ動画原宿風プレーヤー</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="player">
+        <video id="video" controls>
+            <source src="your-video-file.mp4" type="video/mp4">
+            お使いのブラウザは動画タグに対応していません。
+        </video>
+        <div class="controls">
+            <button id="playPause">再生/一時停止</button>
+            <input type="range" id="seekBar" value="0">
+            <button id="mute">ミュート</button>
+            <input type="range" id="volumeBar" min="0" max="1" step="0.1" value="1">
+            <button id="fullScreen">全画面</button>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
