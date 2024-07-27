@@ -58,6 +58,10 @@
 
     });
 
+    video.addEventListener('error', e => {
+        alert('エラー');
+    })
+
     const setCurrent = (val) => {
         show_current_minute.innerText = Math.trunc(val / 60);
         if (numDigits(Math.trunc(val - (show_current_minute.innerText*60))) >= 2) {
