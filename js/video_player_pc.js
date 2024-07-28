@@ -28,12 +28,14 @@
         video.play();
         btn_play.style.display = 'none';
         btn_pause.style.display = 'inline';
+        addComment("動画が再生されました");
     })
 
     btn_pause.addEventListener('click', () => {
         video.pause();
         btn_pause.style.display = 'none';
         btn_play.style.display = 'inline';
+        addComment("動画が停止されました");
     })
 
 /*
@@ -44,16 +46,19 @@
 
     btn_back.addEventListener('click', e => {
         video.currentTime -= 10;
+        addComment("10秒戻りました");
     });
 
     btn_forward.addEventListener('click', e => {
         video.currentTime += 10;
+        addComment("10秒進みました");
     });
 
     btn_normal.addEventListener('click', e => {
         video.playbackRate = 1.0;
         show_speed.innerText = "1倍速";
         inp_speed.value = 1.0;
+        addComment("再生速度をリセットしました");
     });
 
     video.addEventListener('timeupdate', e => {
@@ -71,18 +76,16 @@
             show_duration.innerText = Math.trunc(video.duration / 60) + ":0" + Math.trunc(video.duration - (Math.trunc(video.duration / 60)*60));
         }
 
-        addComment("ここすき");
-        addComment("wwwww");
-        addComment("やりますねぇ");
-
     });
 
     video.addEventListener('error', e => {
         alert('エラー');
+        addComment("エラー");
     })
 
     const setSpeed = (val) => {
         show_speed.innerText = inp_speed.value + "倍速";
+        addComment(inp_speed.value + "倍速になりました");
     }
 
     const speedOnChange = (e) => {
@@ -103,6 +106,7 @@
         } else {
             show_duration.innerText = Math.trunc(video.duration / 60) + ":0" + Math.trunc(video.duration - (Math.trunc(video.duration / 60)*60));
         }
+        addComment(show_current_minute.innerText + ":" + show_current_second.innerText + "に飛びました");
     }
 
     const currentOnChange = (e) => {
@@ -112,6 +116,7 @@
 
     const setVolume = (val) => {
         show_volume.innerText = val;
+        addComment("音量を" + show_volume.innerText + "にしました");
     }
 
     const volumeOnChange = (e) => {
@@ -126,23 +131,28 @@
         setVolume(inp_volume.value);
         setCurrent(inp_seekbar.value);
         setSpeed(inp_speed.value);
+        loadComments();
     }
 
     document.addEventListener('keydown', event => {
         let keys = event.key;
         if (keys == 'ArrowRight') {
             video.currentTime += 10;
+            addComment("10秒進みました");
         } else if (keys == 'ArrowLeft') {
             video.currentTime -= 10;
+            addComment("10秒戻りました");
         } else if (keys == ' ') {
             if (btn_pause.style.display == 'inline') {
                 video.pause();
                 btn_pause.style.display = 'none';
                 btn_play.style.display = 'inline';
+                addComment("動画が停止されました");
             } else if (btn_play.style.display == 'inline') {
                 video.play();
                 btn_play.style.display = 'none';
                 btn_pause.style.display = 'inline';
+                addComment("動画が再生されました");
             } else {alert('予期しないエラーです。管理者にお知らせください。理由：再生ボタン停止ボタン消失')}
         }
     });
@@ -150,6 +160,19 @@
     const commentContainer = document.getElementById('comment_container');
     const commentText = document.getElementById('comment_text');
     const sendCommentButton = document.getElementById('send_comment');
+
+    function loadComments() {
+        const comments = JSON.parse(localStorage.getItem('comments')) || [];
+        comments.forEach(comment => {
+            addComment(comment.text);
+        });
+    }
+
+    function saveComment(text) {
+        const comments = JSON.parse(localStorage.getItem('comments')) || [];
+        comments.push({ text });
+        localStorage.setItem('comments', JSON.stringify(comments));
+    }
 
     function addComment(text) {
         const comment = document.createElement('div');
@@ -167,7 +190,8 @@
         const text = commentText.value;
         if (text) {
             addComment(text);
-            commentText.value = ''; 
+            saveComment(text);
+            commentText.value = '';
         }
     });
 
@@ -176,5 +200,4 @@
             sendCommentButton.click();
         }
     });
-
 

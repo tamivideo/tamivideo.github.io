@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>図形</title>
+</head>
+<body onload="strDraw();">
+    <canvas id="pos" width="200" height="200"></canvas>
+    <input type="range" id="kakusuu" min="3" max="10"><span id="show-kakusuu"></span>
+    <script>
+        const inp_kakusuu = document.getElementById('kakusuu');
+        const show_kakusuu = document.getElementById('show-kakusuu');
+        
+        inp_kakusuu.value = 3;
+        var zukei_kakusuu = 3;
+        var hankei = 50;
+        var hen = 0;
+
+        var temp_kakkei = 3;
+        var chushin = [100, 100];
+
+        function line(fig,x1,y1,x2,y2,thick,color) {
+            fig.beginPath();
+            fig.lineWidth = thick;
+            fig.strokeStyle = color;
+            fig.moveTo(x1,y1);
+            fig.lineTo(x2,y2);
+            fig.stroke();
+        }
+
+        const setKakusuu = (val) => {
+            show_kakusuu.innerText = inp_kakusuu.value;
+            strDraw()
+        }
+
+        const kakusuuOnChange = (e) => {
+            zukei_kakusuu = inp_kakusuu.value;
+            setKakusuu(e.target.value);
+        }
+
+        function zukeiByoga(figg, kakkei) {
+            temp_kakkei = kakkei;
+            var kakudo = Math.PI+((Math.PI*(kakkei-2))/kakkei);
+            var gaikaku = Math.PI-((Math.PI*(kakkei-2))/kakkei);
+
+            hen = 2*hankei*Math.sin(gaikaku/2);
+            var kiten = [chushin[0]-(hen/2), chushin[1]+(hankei*Math.cos(gaikaku/2))];
+            var kakudo_i = 0;
+
+            for (let i = 0; i < kakkei; i++) {
+                line(figg,kiten[0],kiten[1],kiten[0]+(Math.cos(kakudo_i)*hen),kiten[1]+(Math.sin(kakudo_i)*hen),4,"blue");
+                kiten[0] = kiten[0]+(Math.cos(kakudo_i)*hen);
+                kiten[1] = kiten[1]+(Math.sin(kakudo_i)*hen);
+                kakudo_i += kakudo;
+            }
+        }
+
+        function zukeiByogaSakujo(figg, kakkei) {
+            temp_kakkei = kakkei;
+            var kakudo = Math.PI+((Math.PI*(kakkei-2))/kakkei);
+            var gaikaku = Math.PI-((Math.PI*(kakkei-2))/kakkei);
+
+            hen = 2*hankei*Math.sin(gaikaku/2);
+            var kiten = [chushin[0]-(hen/2), chushin[1]+(hankei*Math.cos(gaikaku/2))];
+            var kakudo_i = 0;
+
+            for (let i = 0; i < kakkei; i++) {
+                line(figg,kiten[0],kiten[1],kiten[0]+(Math.cos(kakudo_i)*hen),kiten[1]+(Math.sin(kakudo_i)*hen),16,"white");
+                kiten[0] = kiten[0]+(Math.cos(kakudo_i)*hen);
+                kiten[1] = kiten[1]+(Math.sin(kakudo_i)*hen);
+                kakudo_i += kakudo;
+            }
+        }
+
+        function strDraw() {
+            inp_kakusuu.addEventListener('input', kakusuuOnChange);
+
+            var id1 = document.getElementById('pos');
+
+            var fig = id1.getContext('2d');
+
+            zukeiByogaSakujo(fig, temp_kakkei);
+            zukeiByoga(fig, inp_kakusuu.value);
+        }
+
+        btn_reset.addEventListener('click', e => {
+            fig.clearRect(0, 0, canvas.width, canvas.height);
+        });
+        
+        setKakusuu();
+    </script>
+</body>
+</html>
