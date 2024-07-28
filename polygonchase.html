@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>図形</title>
+    <title>ポリゴンチェイス</title>
 </head>
-<body onload="strDraw();">
-    <canvas id="pos" width="200" height="200"></canvas>
+<body onload="initGame();">
+    <canvas id="pos" width="400" height="400"></canvas>
     <hr>
     <input type="range" id="kakusuu" min="3" max="10"><span id="show-kakusuu"></span>
     <hr>
     <input type="range" id="kaitenkakudo" min="0" max="360"><span id="show-kaiten"></span>
+    <hr>
+    <div>ポイント: <span id="points">0</span></div>
+    <div>残り時間: <span id="time">60</span>秒</div>
     <script>
         const inp_kakusuu = document.getElementById('kakusuu');
         const show_kakusuu = document.getElementById('show-kakusuu');
         const inp_kaiten = document.getElementById('kaitenkakudo');
         const show_kaiten = document.getElementById('show-kaiten');
+        const pointsDisplay = document.getElementById('points');
+        const timeDisplay = document.getElementById('time');
         
+        let points = 0;
+        let timeLeft = 60;
+        let target = { x: 0, y: 0, size: 10 };
+
         inp_kakusuu.value = 3;
         inp_kaiten.value = 0;
         var zukei_kakusuu = 3;
@@ -24,7 +33,7 @@
         var hen = 0;
 
         var temp_kakkei = 3;
-        var chushin = [100, 100];
+        var chushin = [200, 200];
 
         var kaiten = 0;
 
@@ -98,14 +107,50 @@
 
             var fig = id1.getContext('2d');
 
-            
             zukeiByogaSakujo(fig, temp_kakkei);
             kaiten = Math.PI*inp_kaiten.value/180;
             zukeiByoga(fig, inp_kakusuu.value);
+
+            drawTarget(fig);
         }
 
-        setKakusuu();
-        setKaiten();
+        function drawTarget(fig) {
+            target.x = Math.random() * 380 + 10;
+            target.y = Math.random() * 380 + 10;
+            fig.beginPath();
+            fig.arc(target.x, target.y, target.size, 0, 2 * Math.PI);
+            fig.fillStyle = "red";
+            fig.fill();
+        }
+
+        function checkCollision() {
+            const dx = chushin[0] - target.x;
+            const dy = chushin[1] - target.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < hankei + target.size) {
+                points++;
+                pointsDisplay.innerText = points;
+                strDraw();
+            }
+        }
+
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                timeDisplay.innerText = timeLeft;
+            } else {
+                alert("ゲームオーバー！あなたのスコアは " + points + " ポイントです。");
+                clearInterval(timerInterval);
+            }
+        }
+
+        function initGame() {
+            setKakusuu();
+            setKaiten();
+            timerInterval = setInterval(updateTimer, 1000);
+            setInterval(checkCollision, 100);
+        }
     </script>
 </body>
 </html>
